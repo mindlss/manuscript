@@ -3,11 +3,16 @@ const { Article } = require('../models/articleModel');
 class ArticleService {
     // Создание статьи с правильной позицией в пределах категории
     async createArticle(data) {
-        const lastArticle = await Article.findOne({
-            category: data.category,
-        }).sort('-position');
-        data.position = lastArticle ? lastArticle.position + 1 : 1;
-        return await Article.create(data);
+        let position = 1;
+
+        if (data.category) {
+            const lastArticle = await Article.findOne({
+                category: data.category,
+            }).sort('-position');
+            position = lastArticle ? lastArticle.position + 1 : 1;
+        }
+
+        return await Article.create({ ...data, position });
     }
 
     // Получение статьи по ID с популяцией связанных данных
