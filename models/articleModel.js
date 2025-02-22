@@ -32,11 +32,17 @@ const articleSchema = new Schema(
                 ref: 'Tag',
             },
         ],
+        position: {
+            type: Number,
+            required: true,
+        },
     },
     {
         timestamps: true,
     }
 );
+
+articleSchema.index({ category: 1, position: 1 }, { unique: true });
 
 const Article = mongoose.model('Article', articleSchema);
 

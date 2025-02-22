@@ -10,6 +10,11 @@ const categorySchema = new Schema(
         description: {
             type: String,
         },
+        position: {
+            type: Number,
+            unique: true,
+            required: true,
+        },
     },
     {
         timestamps: true,
