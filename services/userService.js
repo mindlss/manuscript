@@ -9,7 +9,8 @@ class UserService {
         const { username, password } = data;
 
         const existingUser = await User.findOne({ username });
-        if (existingUser) throw new Error('User with the same name already exists');
+        if (existingUser)
+            throw new Error('User with the same name already exists');
 
         const passwordHash = await bcrypt.hash(password, 10);
 
@@ -27,7 +28,11 @@ class UserService {
         const isMatch = await bcrypt.compare(password, user.passwordHash);
         if (!isMatch) throw new Error('Invalid username or password');
 
-        const token = jwt.sign({ userId: user._id, username: user.username }, SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign(
+            { userId: user._id, username: user.username },
+            SECRET_KEY,
+            { expiresIn: '1h' }
+        );
         return token;
     }
 

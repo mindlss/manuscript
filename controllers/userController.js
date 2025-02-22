@@ -10,7 +10,9 @@ class UserController {
             const { username, password } = req.body;
 
             if (!username || !password) {
-                return res.status(400).json({ error: 'Username and password are required' });
+                return res
+                    .status(400)
+                    .json({ error: 'Username and password are required' });
             }
 
             const newUser = await UserService.createUser(req.body);
@@ -26,7 +28,9 @@ class UserController {
             const { username, password } = req.body;
 
             if (!username || !password) {
-                return res.status(400).json({ error: 'Username and password are required' });
+                return res
+                    .status(400)
+                    .json({ error: 'Username and password are required' });
             }
 
             const token = await UserService.authenticateUser(req.body);

@@ -5,7 +5,9 @@ class ArticleService {
     // Создание статьи
     async createArticle(data) {
         if (!data.category) {
-            let uncategorized = await Category.findOne({ name: 'uncategorized' });
+            let uncategorized = await Category.findOne({
+                name: 'uncategorized',
+            });
 
             if (!uncategorized) {
                 uncategorized = await Category.create({
@@ -18,7 +20,9 @@ class ArticleService {
             data.category = uncategorized._id;
         }
 
-        const lastArticle = await Article.findOne({ category: data.category }).sort('-position');
+        const lastArticle = await Article.findOne({
+            category: data.category,
+        }).sort('-position');
         const position = lastArticle ? lastArticle.position + 1 : 1;
 
         return await Article.create({ ...data, position });
@@ -57,7 +61,9 @@ class ArticleService {
 
     // Обновление статьи (позиция не меняется)
     async updateArticle(articleId, updateData) {
-        return await Article.findByIdAndUpdate(articleId, updateData, { new: true });
+        return await Article.findByIdAndUpdate(articleId, updateData, {
+            new: true,
+        });
     }
 
     // Удаление статьи с коррекцией позиций в категории
@@ -72,7 +78,10 @@ class ArticleService {
             { $inc: { position: -1 } }
         );
 
-        return { message: 'The article has been removed and the order has been updated' };
+        return {
+            message:
+                'The article has been removed and the order has been updated',
+        };
     }
 
     // Изменение позиции статьи внутри категории
@@ -80,7 +89,9 @@ class ArticleService {
         const article = await Article.findById(articleId);
         if (!article) throw new Error('Article not found');
 
-        const maxPosition = await Article.countDocuments({ category: article.category });
+        const maxPosition = await Article.countDocuments({
+            category: article.category,
+        });
         if (newPosition < 1 || newPosition > maxPosition) {
             throw new Error('Incorrect position');
         }
