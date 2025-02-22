@@ -15,7 +15,12 @@ class ArticleController {
                 return res.status(400).json({ error: 'Incorrect category ID' });
             }
 
-            const article = await ArticleService.createArticle(req.body);
+            const userId = req.userId;
+
+            const article = await ArticleService.createArticle(
+                req.body,
+                userId
+            );
             res.status(201).json(article);
         } catch (error) {
             res.status(500).json({ error: error.message });

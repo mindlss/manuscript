@@ -3,7 +3,7 @@ const { Category } = require('../models/categoryModel');
 
 class ArticleService {
     // Создание статьи
-    async createArticle(data) {
+    async createArticle(data, userId) {
         if (!data.category) {
             let uncategorized = await Category.findOne({
                 name: 'uncategorized',
@@ -25,7 +25,7 @@ class ArticleService {
         }).sort('-position');
         const position = lastArticle ? lastArticle.position + 1 : 1;
 
-        return await Article.create({ ...data, position });
+        return await Article.create({ ...data, position, author: userId });
     }
 
     // Получение статьи по ID с популяцией связанных данных
@@ -100,10 +100,25 @@ class ArticleService {
             category: article.category,
             position: newPosition,
         });
+
         if (swappedArticle) {
+            const originalPosition = article.position;
+
             await Article.findByIdAndUpdate(swappedArticle._id, {
-                position: article.position,
+                position: -1,
             });
+
+            const originalArticle = await Article.findByIdAndUpdate(
+                articleId,
+                { position: newPosition },
+                { new: true }
+            );
+
+            await Article.findByIdAndUpdate(swappedArticle._id, {
+                position: originalPosition,
+            });
+
+            return originalArticle;
         }
 
         return await Article.findByIdAndUpdate(
