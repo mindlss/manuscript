@@ -12,8 +12,10 @@ app.use(express.json());
 
 const indexRoutes = require('./routes/index');
 const articlesRoutes = require('./routes/articles');
+const authRoutes = require('./routes/auth');
 app.use('/', indexRoutes);
 app.use('/articles', articlesRoutes);
+app.use('/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
