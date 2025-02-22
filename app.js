@@ -11,7 +11,9 @@ connectDB();
 app.use(express.json());
 
 const indexRoutes = require('./routes/index');
+const articlesRoutes = require('./routes/articles');
 app.use('/', indexRoutes);
+app.use('/articles', articlesRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
