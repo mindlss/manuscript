@@ -15,8 +15,8 @@
 ## 🔧 Установка и запуск
 ### 1️⃣ Клонирование репозитория
 ```bash
-git clone https://github.com/your-repo/documentation-backend.git
-cd documentation-backend
+git clone https://github.com/mindlss/manuscript.git
+cd manuscript
 ```
 ### 2️⃣ Установка зависимостей
 ```bash
