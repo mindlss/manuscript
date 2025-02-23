@@ -31,10 +31,22 @@ class ArticleService {
     // Получение статьи по ID с популяцией связанных данных
     async getArticleById(articleId) {
         return await Article.findById(articleId)
-            .populate('category')
-            .populate('author')
-            .populate('images')
-            .populate('tags');
+            .populate({
+                path: 'category',
+                select: '-createdAt -updatedAt -__v',
+            })
+            .populate({
+                path: 'author',
+                select: '-passwordHash -createdAt -updatedAt -__v',
+            })
+            .populate({
+                path: 'images',
+                select: '-createdAt -updatedAt -__v',
+            })
+            .populate({
+                path: 'tags',
+                select: '-createdAt -updatedAt -__v',
+            });
     }
 
     // Получение id статей, сгруппированных по категориям
