@@ -17,6 +17,7 @@
     "jsonwebtoken": "^9.0.2",
     "logrotate-stream": "^0.2.9",
     "mongoose": "^8.9.3",
+    "multer": "^1.4.5-lts.1",
     "pino": "^9.6.0",
     "pino-multi-stream": "^6.0.0",
     "pino-pretty": "^13.0.0",

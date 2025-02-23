@@ -1,4 +1,4 @@
-const { Tag } = require('../models/tag');
+const { Tag } = require('../models/tagModel');
 
 class TagService {
     // Получение всех тегов

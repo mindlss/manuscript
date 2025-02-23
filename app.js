@@ -10,14 +10,18 @@ connectDB();
 
 app.use(express.json());
 
+app.use('/uploads', express.static('uploads'));
+
 const indexRoutes = require('./routes/index');
 const articlesRoutes = require('./routes/articles');
 const authRoutes = require('./routes/auth');
 const tagsRoutes = require('./routes/tags');
+const imageRoutes = require('./routes/images');
 app.use('/', indexRoutes);
 app.use('/articles', articlesRoutes);
 app.use('/auth', authRoutes);
 app.use('/tags', tagsRoutes);
+app.use('/images', imageRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
