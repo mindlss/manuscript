@@ -13,9 +13,11 @@ app.use(express.json());
 const indexRoutes = require('./routes/index');
 const articlesRoutes = require('./routes/articles');
 const authRoutes = require('./routes/auth');
+const tagsRoutes = require('./routes/tags');
 app.use('/', indexRoutes);
 app.use('/articles', articlesRoutes);
 app.use('/auth', authRoutes);
+app.use('/tags', tagsRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
