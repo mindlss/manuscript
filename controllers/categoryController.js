@@ -1,4 +1,5 @@
 const CategoryService = require('../services/categoryService');
+const mongoose = require('mongoose');
 
 class CategoryController {
     // Получить все категории
@@ -15,6 +16,11 @@ class CategoryController {
     async getCategory(req, res) {
         try {
             const { id } = req.params;
+
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                return res.status(400).json({ error: 'Incorrect category ID' });
+            }
+
             const category = await CategoryService.getCategoryById(id);
             if (!category) {
                 return res.status(404).json({ error: 'Category not found' });
@@ -29,6 +35,7 @@ class CategoryController {
     async createCategory(req, res) {
         try {
             const { name, description } = req.body;
+
             if (!name) {
                 return res.status(400).json({ error: 'Name is required' });
             }
@@ -47,6 +54,11 @@ class CategoryController {
     async updateCategory(req, res) {
         try {
             const { id } = req.params;
+
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                return res.status(400).json({ error: 'Incorrect category ID' });
+            }
+
             const updatedCategory = await CategoryService.updateCategory(
                 id,
                 req.body
@@ -64,6 +76,11 @@ class CategoryController {
     async deleteCategory(req, res) {
         try {
             const { id } = req.params;
+
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                return res.status(400).json({ error: 'Incorrect category ID' });
+            }
+
             const deletedCategory = await CategoryService.deleteCategory(id);
             if (!deletedCategory) {
                 return res.status(404).json({ error: 'Category not found' });
@@ -80,14 +97,12 @@ class CategoryController {
             const { id } = req.params;
             const { newPosition } = req.body;
 
-            if (newPosition == null) {
-                return res.status(400).json({ error: 'Position is required' });
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                return res.status(400).json({ error: 'Incorrect category ID' });
             }
 
-            if (newPosition == 0) {
-                return res
-                    .status(400)
-                    .json({ error: 'Position must be greater than 0' });
+            if (!Number.isInteger(newPosition) || newPosition < 1) {
+                return res.status(400).json({ error: 'Incorrect position' });
             }
 
             const updatedCategory = await CategoryService.reorderCategory(
