@@ -82,9 +82,11 @@ class CategoryController {
             }
 
             const deletedCategory = await CategoryService.deleteCategory(id);
+
             if (!deletedCategory) {
                 return res.status(404).json({ error: 'Category not found' });
             }
+
             res.status(200).json({ message: 'Category deleted' });
         } catch (error) {
             res.status(500).json({ error: error.message });

@@ -32,6 +32,10 @@ class CategoryService {
         const category = await Category.findById(id);
         if (!category) throw new Error('Category not found');
 
+        if (category.position === 0) {
+            throw new Error('You cannot delete the uncategorized category');
+        }
+
         await Category.findByIdAndDelete(id);
 
         await Category.updateMany(
