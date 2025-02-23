@@ -66,7 +66,7 @@ class ArticleService {
                 };
             }
 
-            acc[categoryName].articles.push(article._id);
+            acc[categoryName].articles.push({"_id": article._id, "title": article.title, "position": article.position});
             return acc;
         }, {});
     }

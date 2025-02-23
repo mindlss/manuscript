@@ -52,14 +52,17 @@ npm start
 ### 📌 Создание статьи (`POST /articles/`)
 
 Создает новую статью. Если не указана категория, она будет помещена в "uncategorized".  
-**Требуемые поля:** `title`, `category` (необязательно).  
+**Обязательные поля:** `title`, `content`.  
 **Защита:** Требуется JWT токен.
 
 **Пример тела запроса:**
 ```json
 {
-  "title": "New Article Title",
-  "category": "60d0fe4f5311236168a109ca"
+  "title": "myArticle",
+  "category": "67bb6397ccdfe21a4a4d79cc",
+  "content": "Article text content",
+  "images": ["67bb0d5e3661b205d38f3ac8"],
+  "tags": ["67bb60e0f184a9e9d4871c98"]
 }
 ```
 
@@ -94,14 +97,33 @@ npm start
 **Пример ответа:**
 ```json
 {
-  "Technology": {
-    "description": "Articles about technology.",
-    "position": 1,
-    "articles": [
-      "60d0fe4f5311236168a109ca",
-      "60d0fe4f5311236168a109cb"
-    ]
-  }
+    "Uncategorized": {
+        "description": "Articles without category",
+        "position": 0,
+        "articles": [
+            {
+                "_id": "67bb61d4f184a9e9d4871c9e",
+                "title": "article1",
+                "position": 1
+            }
+        ]
+    },
+    "myCategory": {
+        "description": "Description of my category",
+        "position": 1,
+        "articles": [
+            {
+                "_id": "67bb63bbccdfe21a4a4d79cf",
+                "title": "article2",
+                "position": 1
+            },
+            {
+                "_id": "67bb62bfcgdg22ydjs337dgf",
+                "title": "article3",
+                "position": 2
+            }
+        ]
+    }
 }
 ```
 
