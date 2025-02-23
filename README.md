@@ -74,18 +74,37 @@ npm start
 **Пример ответа:**
 ```json
 {
-  "_id": "60d0fe4f5311236168a109ca",
-  "title": "Article Title",
-  "category": {
-    "_id": "60d0fe4f5311236168a109cb",
-    "name": "Technology"
-  },
-  "author": {
-    "_id": "60d0fe4f5311236168a109cc",
-    "username": "john_doe"
-  },
-  "images": [],
-  "tags": ["tech", "innovation"]
+    "_id": "67bb61d4f184a9e9d4871c9e",
+    "title": "myArticle",
+    "content": "Article text content",
+    "category": {
+        "_id": "67bb6118f184a9e9d4871c9b",
+        "name": "myCategory",
+        "description": "my category description",
+        "position": 1
+    },
+    "author": {
+        "_id": "67bb606df184a9e9d4871c95",
+        "username": "mindes"
+    },
+    "images": [
+        {
+            "_id": "67bb0d5e3661b205d38f3ac8",
+            "name": "myImage.png",
+            "url": "/uploads/1740311902658-myImage.png"
+        }
+    ],
+    "tags": [
+        {
+            "_id": "67bb60e0f184a9e9d4871c98",
+            "name": "myTag",
+            "content": "my tag text"
+        }
+    ],
+    "position": 1,
+    "createdAt": "2025-02-23T12:00:00.000Z",
+    "updatedAt": "2025-02-23T12:00:00.000Z",
+    "__v": 0
 }
 ```
 
