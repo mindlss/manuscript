@@ -1,7 +1,11 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const { uploadImage, getImages, removeImage } = require('../controllers/imageController');
+const {
+    uploadImage,
+    getImages,
+    removeImage,
+} = require('../controllers/imageController');
 
 const router = express.Router();
 const storage = multer.diskStorage({
@@ -14,7 +18,31 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-router.post('/upload', upload.single('image'), uploadImage);
+router.post(
+    '/upload',
+    (req, res, next) => {
+        upload.single('image')(req, res, (err) => {
+            if (err instanceof multer.MulterError) {
+                return res
+                    .status(400)
+                    .json({
+                        message: 'Error uploading file',
+                        error: err.message,
+                    });
+            } else if (err) {
+                return res
+                    .status(500)
+                    .json({
+                        message: 'Internal server error',
+                        error: err.message,
+                    });
+            }
+            next();
+        });
+    },
+    uploadImage
+);
+
 router.get('/', getImages);
 router.delete('/:id', removeImage);
 
