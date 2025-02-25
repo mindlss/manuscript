@@ -1,6 +1,8 @@
 const { Article } = require('../models/articleModel');
 const { Category } = require('../models/categoryModel');
 
+const articleHistoryService = require('./articleHistoryService');
+
 class ArticleService {
     // Создание статьи
     async createArticle(data, userId) {
@@ -66,13 +68,34 @@ class ArticleService {
                 };
             }
 
-            acc[categoryName].articles.push({"_id": article._id, "title": article.title, "position": article.position});
+            acc[categoryName].articles.push({
+                _id: article._id,
+                title: article.title,
+                position: article.position,
+            });
             return acc;
         }, {});
     }
 
     // Обновление статьи (позиция не меняется)
-    async updateArticle(articleId, updateData) {
+    async updateArticle(articleId, updateData, editorId) {
+        const article = await Article.findById(articleId);
+        if (!article) {
+            throw new Error('Article not found');
+        }
+
+        await articleHistoryService.createArticleHistory(
+            {
+                article: article._id,
+                content: article.content,
+                author: article.author,
+                images: article.images,
+                tags: article.tags,
+                editedAt: new Date(),
+            },
+            editorId
+        );
+
         return await Article.findByIdAndUpdate(articleId, updateData, {
             new: true,
         });
@@ -83,6 +106,8 @@ class ArticleService {
         const article = await Article.findById(articleId);
         if (!article) throw new Error('Article not found');
 
+        await articleHistoryService.deleteAllHistoryByArticle(articleId);
+
         await Article.findByIdAndDelete(articleId);
 
         await Article.updateMany(
@@ -91,8 +116,7 @@ class ArticleService {
         );
 
         return {
-            message:
-                'The article has been removed and the order has been updated',
+            message: 'The article has been removed along with its history, and the order has been updated',
         };
     }
 

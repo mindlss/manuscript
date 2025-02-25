@@ -67,9 +67,12 @@ class ArticleController {
                 return res.status(400).json({ error: 'Incorrect article ID' });
             }
 
+            const userId = req.userId;
+
             const updatedArticle = await ArticleService.updateArticle(
                 articleId,
-                updateData
+                updateData,
+                userId
             );
             if (!updatedArticle) {
                 return res.status(404).json({ error: 'Article not found' });
