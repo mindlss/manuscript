@@ -18,12 +18,14 @@ const authRoutes = require('./routes/auth');
 const tagsRoutes = require('./routes/tags');
 const imageRoutes = require('./routes/images');
 const categoryRoutes = require('./routes/categories');
+const historyRoutes = require('./routes/history');
 app.use('/', indexRoutes);
 app.use('/articles', articlesRoutes);
 app.use('/auth', authRoutes);
 app.use('/tags', tagsRoutes);
 app.use('/images', imageRoutes);
 app.use('/categories', categoryRoutes);
+app.use('/history', historyRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
