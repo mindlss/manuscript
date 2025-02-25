@@ -161,13 +161,13 @@ npm start
 
 ### 📌 Удаление статьи (`DELETE /articles/:articleId`)
 
-Удаляет статью и корректирует позиции оставшихся статей в категории.  
+Удаляет статью вместе с историей и корректирует позиции оставшихся статей в категории.  
 **Защита:** Требуется JWT токен.
 
 **Пример ответа:**
 ```json
 {
-  "message": "The article has been removed and the order has been updated"
+  "message": "The article has been removed along with its history, and the order has been updated"
 }
 ```
 
@@ -224,21 +224,21 @@ npm start
 **Пример ответа:**
 ```json
 {
-    "_id": "67be2483334a42f46cae6903",
-    "article": "67bb61d4f184a9e9d4871c9e",
-    "content": "Old content of article",
-    "author": "60d0fe4f5311236168a109ca",
-    "editor": "67bb606df184a9e9d4871c95",
-    "images": [
-        "67bb0d5e3661b205d38f3ac8"
-    ],
-    "tags": [
-        "67bb60e0f184a9e9d4871c98"
-    ],
-    "editedAt": "2025-02-25T20:13:55.533Z",
-    "createdAt": "2025-02-25T20:13:55.555Z",
-    "updatedAt": "2025-02-25T20:13:55.555Z",
-    "__v": 0
+  "_id": "67be2483334a42f46cae6903",
+  "article": "67bb61d4f184a9e9d4871c9e",
+  "content": "Old content of article",
+  "author": "60d0fe4f5311236168a109ca",
+  "editor": "67bb606df184a9e9d4871c95",
+  "images": [
+    "67bb0d5e3661b205d38f3ac8"
+  ],
+  "tags": [
+    "67bb60e0f184a9e9d4871c98"
+  ],
+  "editedAt": "2025-02-25T20:13:55.533Z",
+  "createdAt": "2025-02-25T20:13:55.555Z",
+  "updatedAt": "2025-02-25T20:13:55.555Z",
+  "__v": 0
 }
 ```
 
