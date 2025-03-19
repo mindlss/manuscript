@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const rfs = require('rotating-file-stream');
 
-const logDirectory = path.join(__dirname, '../logs');
+const logDirectory = path.join(__dirname, '../../logs');
 const logFileName = () => {
     const date = new Date();
     const day = String(date.getDate()).padStart(2, '0');

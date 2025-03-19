@@ -5,7 +5,7 @@ const logger = require('./utils/logger');
 dotenv.config();
 const app = express();
 
-const connectDB = require('./config/db');
+const connectDB = require('../config/db');
 connectDB();
 
 app.use(express.json());

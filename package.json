@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node dist/app.js",
+    "dev": "shx test -e src/app.ts && nodemon --exec ts-node src/app.ts || nodemon src/app.js",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "prepare": "npm run build"
   },
   "keywords": [],
   "author": "",
@@ -25,8 +28,15 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.10",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
+    "@typescript-eslint/parser": "^8.26.1",
     "eslint": "^9.17.0",
     "globals": "^15.14.0",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "shx": "^0.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
   }
 }
