@@ -1,0 +1,9 @@
+{
+    "watch": ["src", "config"],
+    "ext": "js,ts,json",
+    "execMap": {
+      "ts": "ts-node"
+    },
+    "ignore": ["node_modules"]
+  }
+  
