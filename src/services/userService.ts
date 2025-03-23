@@ -10,7 +10,8 @@ class UserService {
         const { username, password } = data;
 
         const existingUser = await User.findOne({ username });
-        if (existingUser) throw new Error('User with the same name already exists');
+        if (existingUser)
+            throw new Error('User with the same name already exists');
 
         const passwordHash = await bcrypt.hash(password, 10);
 

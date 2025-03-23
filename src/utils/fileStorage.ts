@@ -7,7 +7,8 @@ if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-export const getImagePath = (filename: string): string => path.join(uploadDir, filename);
+export const getImagePath = (filename: string): string =>
+    path.join(uploadDir, filename);
 
 export const deleteImageFile = (filename: string): void => {
     const filePath = getImagePath(filename);

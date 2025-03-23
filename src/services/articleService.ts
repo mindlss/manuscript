@@ -115,7 +115,8 @@ class ArticleService {
         );
 
         return {
-            message: 'The article has been removed along with its history, and the order has been updated',
+            message:
+                'The article has been removed along with its history, and the order has been updated',
         };
     }
 
