@@ -1,9 +1,5 @@
 {
-    "watch": ["src", "config"],
-    "ext": "js,ts,json",
-    "execMap": {
-      "ts": "ts-node"
-    },
-    "ignore": ["node_modules"]
-  }
-  
+  "watch": ["dist"],
+  "ext": "js",
+  "exec": "node dist/app.js"
+}

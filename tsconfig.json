@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
+      "@config/*": ["config/*"],
       "@controllers/*": ["controllers/*"],
       "@middlewares/*": ["middlewares/*"],
       "@models/*": ["models/*"],
@@ -14,15 +15,16 @@
     "moduleResolution": "Node",
     "strict": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "outDir": "./dist",
-    "rootDir": "./"
+    "rootDir": "./src"
   },
   "include": [
-    "src/**/*.js",
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "src/**/*.js"
   ],
   "exclude": [
     "node_modules",

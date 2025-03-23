@@ -3,13 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "start": "node dist/app.js",
-    "dev": "shx test -e src/app.ts && nodemon --exec ts-node src/app.ts || nodemon src/app.js",
-    "build": "tsc",
-    "lint": "eslint . --ext .ts",
-    "prepare": "npm run build"
+    "build": "tsup",
+    "dev": "concurrently \"tsup --watch\" \"nodemon --watch dist --exec node dist/app.js\"",
+    "start": "node dist/app.js"
   },
   "keywords": [],
   "author": "",
@@ -37,11 +35,12 @@
     "@types/pino-multi-stream": "^5.1.6",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
+    "concurrently": "^9.1.2",
     "eslint": "^9.17.0",
     "globals": "^15.14.0",
     "nodemon": "^3.1.9",
     "shx": "^0.4.0",
-    "ts-node": "^10.9.2",
+    "tsup": "^8.4.0",
     "typescript": "^5.8.2"
   }
 }

@@ -1,15 +1,15 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { connectDB } from '../config/db.js';
-import logger from './utils/logger.js';
+import connectDB from '@config/db';
+import { logger } from '@utils/logger';
 
-import indexRoutes from './routes/index.js';
-import articlesRoutes from './routes/articles.js';
-import authRoutes from './routes/auth.js';
-import tagsRoutes from './routes/tags.js';
-import imageRoutes from './routes/images.js';
-import categoryRoutes from './routes/categories.js';
-import historyRoutes from './routes/history.js';
+import indexRoutes from '@routes/index';
+import articlesRoutes from '@routes/articles';
+import authRoutes from '@routes/auth';
+import tagsRoutes from '@routes/tags';
+import imageRoutes from '@routes/images';
+import categoryRoutes from '@routes/categories';
+import historyRoutes from '@routes/history';
 
 dotenv.config();
 
