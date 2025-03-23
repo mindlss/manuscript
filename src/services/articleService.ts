@@ -1,6 +1,6 @@
-import { Article } from '../models/articleModel.js';
-import { Category } from '../models/categoryModel.js';
-import articleHistoryService from './articleHistoryService.js';
+import { Article } from '@models/articleModel';
+import { Category } from '@models/categoryModel';
+import articleHistoryService from '@services/articleHistoryService';
 
 class ArticleService {
     // Создание статьи

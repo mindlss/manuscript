@@ -1,4 +1,4 @@
-import { ArticleHistory } from '../models/articleHistoryModel.js';
+import { ArticleHistory } from '@models/articleHistoryModel';
 
 class ArticleHistoryService {
     // Получение всех исторических версий статьи (id и editedAt)

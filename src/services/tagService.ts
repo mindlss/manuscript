@@ -1,4 +1,4 @@
-import { Tag } from '../models/tagModel.js';
+import { Tag } from '@models/tagModel';
 
 class TagService {
     // Получение всех тегов

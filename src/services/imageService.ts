@@ -1,5 +1,5 @@
-import { Image } from '../models/imageModel.js';
-import { deleteImageFile } from '../utils/fileStorage.js';
+import { Image } from '@models/imageModel';
+import { deleteImageFile } from '@utils/fileStorage';
 import path from 'path';
 import { Express } from 'express';
 import 'multer';

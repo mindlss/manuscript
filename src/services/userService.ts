@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { User } from '../models/userModel.js';
+import { User } from '@models/userModel';
 
 const SECRET_KEY = process.env.JWT_SECRET as string;
 

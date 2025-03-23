@@ -1,8 +1,17 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@controllers/*": ["controllers/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@models/*": ["models/*"],
+      "@routes/*": ["routes/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"]
+    },
     "target": "esnext",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -12,7 +21,8 @@
     "rootDir": "./"
   },
   "include": [
-    "src/**/*.js"
+    "src/**/*.js",
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",

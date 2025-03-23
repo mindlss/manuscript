@@ -1,4 +1,4 @@
-import { Category } from '../models/categoryModel.js';
+import { Category } from '@models/categoryModel';
 
 class CategoryService {
     // Получение всех категорий
