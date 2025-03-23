@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import ArticleController from '@controllers/articleController';
+import { verifyToken } from '@middlewares/authMiddleware';
+
 const router = express.Router();
-const ArticleController = require('../controllers/articleController');
-const { verifyToken } = require('../middlewares/authMiddleware');
 
 // Создание статьи
 router.post('/', verifyToken, ArticleController.createArticle);
@@ -19,10 +20,6 @@ router.patch('/:articleId', verifyToken, ArticleController.updateArticle);
 router.delete('/:articleId', verifyToken, ArticleController.deleteArticle);
 
 // Изменение позиции статьи
-router.patch(
-    '/:articleId/reorder',
-    verifyToken,
-    ArticleController.reorderArticle
-);
+router.patch('/:articleId/reorder', verifyToken, ArticleController.reorderArticle);
 
-module.exports = router;
+export default router;

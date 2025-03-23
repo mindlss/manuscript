@@ -1,7 +1,16 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+import mongoose, { Document, Schema, Model } from 'mongoose';
 
-const articleHistorySchema = new Schema(
+export interface IArticleHistory extends Document {
+    article: mongoose.Types.ObjectId;
+    content: string;
+    author: mongoose.Types.ObjectId;
+    editor: mongoose.Types.ObjectId;
+    images: mongoose.Types.ObjectId[];
+    tags: mongoose.Types.ObjectId[];
+    editedAt: Date;
+}
+
+const articleHistorySchema = new Schema<IArticleHistory>(
     {
         article: {
             type: Schema.Types.ObjectId,
@@ -44,6 +53,9 @@ const articleHistorySchema = new Schema(
     }
 );
 
-const ArticleHistory = mongoose.model('ArticleHistory', articleHistorySchema);
+const ArticleHistory: Model<IArticleHistory> = mongoose.model<IArticleHistory>(
+    'ArticleHistory',
+    articleHistorySchema
+);
 
-module.exports = { ArticleHistory };
+export { ArticleHistory };

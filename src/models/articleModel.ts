@@ -1,7 +1,18 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+import mongoose, { Document, Schema, Model, Types } from 'mongoose';
+import { ICategory } from '@models/categoryModel';
 
-const articleSchema = new Schema(
+export interface IArticle extends Document {
+  _id: Types.ObjectId;
+    title: string;
+    content: string;
+    category: Types.ObjectId | ICategory;
+    author: Types.ObjectId;
+    images: Types.ObjectId[];
+    tags: Types.ObjectId[];
+    position: number;
+}
+
+const articleSchema = new Schema<IArticle>(
     {
         title: {
             type: String,
@@ -45,6 +56,9 @@ const articleSchema = new Schema(
 
 articleSchema.index({ category: 1, position: 1 }, { unique: true });
 
-const Article = mongoose.model('Article', articleSchema);
+const Article: Model<IArticle> = mongoose.model<IArticle>(
+    'Article',
+    articleSchema
+);
 
-module.exports = { Article };
+export { Article };
