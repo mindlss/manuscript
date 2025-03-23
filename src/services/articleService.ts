@@ -1,11 +1,10 @@
-const { Article } = require('../models/articleModel');
-const { Category } = require('../models/categoryModel');
-
-const articleHistoryService = require('./articleHistoryService');
+import { Article } from '../models/articleModel.js';
+import { Category } from '../models/categoryModel.js';
+import articleHistoryService from './articleHistoryService.js';
 
 class ArticleService {
     // Создание статьи
-    async createArticle(data, userId) {
+    async createArticle(data: any, userId: string) {
         if (!data.category) {
             let uncategorized = await Category.findOne({
                 name: 'uncategorized',
@@ -31,7 +30,7 @@ class ArticleService {
     }
 
     // Получение статьи по ID с популяцией связанных данных
-    async getArticleById(articleId) {
+    async getArticleById(articleId: string) {
         return await Article.findById(articleId)
             .populate({
                 path: 'category',
@@ -57,7 +56,7 @@ class ArticleService {
             .populate('category')
             .sort({ position: 1 });
 
-        return articles.reduce((acc, article) => {
+        return articles.reduce((acc: any, article: any) => {
             const categoryName = article.category.name;
 
             if (!acc[categoryName]) {
@@ -78,7 +77,7 @@ class ArticleService {
     }
 
     // Обновление статьи (позиция не меняется)
-    async updateArticle(articleId, updateData, editorId) {
+    async updateArticle(articleId: string, updateData: any, editorId: string) {
         const article = await Article.findById(articleId);
         if (!article) {
             throw new Error('Article not found');
@@ -102,7 +101,7 @@ class ArticleService {
     }
 
     // Удаление статьи с коррекцией позиций в категории
-    async deleteArticle(articleId) {
+    async deleteArticle(articleId: string) {
         const article = await Article.findById(articleId);
         if (!article) throw new Error('Article not found');
 
@@ -121,7 +120,7 @@ class ArticleService {
     }
 
     // Изменение позиции статьи внутри категории
-    async reorderArticle(articleId, newPosition) {
+    async reorderArticle(articleId: string, newPosition: number) {
         const article = await Article.findById(articleId);
         if (!article) throw new Error('Article not found');
 
@@ -165,4 +164,4 @@ class ArticleService {
     }
 }
 
-module.exports = new ArticleService();
+export default new ArticleService();

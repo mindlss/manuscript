@@ -1,16 +1,16 @@
-const bcrypt = require('bcrypt');
-const { User } = require('../models/userModel');
-const jwt = require('jsonwebtoken');
-const SECRET_KEY = process.env.JWT_SECRET;
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { User } from '../models/userModel.js';
+
+const SECRET_KEY = process.env.JWT_SECRET as string;
 
 class UserService {
     // Создание пользователя
-    async createUser(data) {
+    async createUser(data: { username: string; password: string }) {
         const { username, password } = data;
 
         const existingUser = await User.findOne({ username });
-        if (existingUser)
-            throw new Error('User with the same name already exists');
+        if (existingUser) throw new Error('User with the same name already exists');
 
         const passwordHash = await bcrypt.hash(password, 10);
 
@@ -19,7 +19,7 @@ class UserService {
     }
 
     // Аутентификация пользователя (вход)
-    async authenticateUser(data) {
+    async authenticateUser(data: { username: string; password: string }) {
         const { username, password } = data;
 
         const user = await User.findOne({ username });
@@ -37,9 +37,9 @@ class UserService {
     }
 
     // Получение пользователя по ID
-    async getUserById(userId) {
+    async getUserById(userId: string) {
         return await User.findById(userId);
     }
 }
 
-module.exports = new UserService();
+export default new UserService();

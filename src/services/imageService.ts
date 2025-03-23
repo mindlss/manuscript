@@ -1,11 +1,11 @@
-const { Image } = require('../models/imageModel');
-const { getImagePath, deleteImageFile } = require('../utils/fileStorage');
-const fs = require('fs');
-const path = require('path');
+import { Image } from '../models/imageModel.js';
+import { deleteImageFile } from '../utils/fileStorage.js';
+import path from 'path';
+import { Express } from 'express';
+import 'multer';
 
 // Сохранение изображения
-const saveImage = async (file) => {
-    const filePath = getImagePath(file.filename);
+const saveImage = async (file: Express.Multer.File) => {
     const imageUrl = `/uploads/${file.filename}`;
 
     const image = new Image({
@@ -23,7 +23,7 @@ const getAllImages = async () => {
 };
 
 // Удаление изображения
-const deleteImage = async (id) => {
+const deleteImage = async (id: string) => {
     const image = await Image.findByIdAndDelete(id);
     if (image) {
         const filename = path.basename(image.url);
@@ -32,4 +32,4 @@ const deleteImage = async (id) => {
     return image;
 };
 
-module.exports = { saveImage, getAllImages, deleteImage };
+export { saveImage, getAllImages, deleteImage };

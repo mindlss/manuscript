@@ -1,24 +1,24 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const logger = require('./utils/logger');
+import express from 'express';
+import dotenv from 'dotenv';
+import { connectDB } from '../config/db.js';
+import logger from './utils/logger.js';
+
+import indexRoutes from './routes/index.js';
+import articlesRoutes from './routes/articles.js';
+import authRoutes from './routes/auth.js';
+import tagsRoutes from './routes/tags.js';
+import imageRoutes from './routes/images.js';
+import categoryRoutes from './routes/categories.js';
+import historyRoutes from './routes/history.js';
 
 dotenv.config();
-const app = express();
 
-const connectDB = require('../config/db');
+const app = express();
 connectDB();
 
 app.use(express.json());
-
 app.use('/uploads', express.static('uploads'));
 
-const indexRoutes = require('./routes/index');
-const articlesRoutes = require('./routes/articles');
-const authRoutes = require('./routes/auth');
-const tagsRoutes = require('./routes/tags');
-const imageRoutes = require('./routes/images');
-const categoryRoutes = require('./routes/categories');
-const historyRoutes = require('./routes/history');
 app.use('/', indexRoutes);
 app.use('/articles', articlesRoutes);
 app.use('/auth', authRoutes);

@@ -1,4 +1,4 @@
-const { Tag } = require('../models/tagModel');
+import { Tag } from '../models/tagModel.js';
 
 class TagService {
     // Получение всех тегов
@@ -7,14 +7,14 @@ class TagService {
     }
 
     // Создание нового тега
-    static async createTag(data) {
+    static async createTag(data: any) {
         return await Tag.create(data);
     }
 
     // Удаление тега по ID
-    static async deleteTag(id) {
+    static async deleteTag(id: string) {
         return await Tag.findByIdAndDelete(id);
     }
 }
 
-module.exports = TagService;
+export default TagService;

@@ -1,4 +1,4 @@
-const { Category } = require('../models/categoryModel');
+import { Category } from '../models/categoryModel.js';
 
 class CategoryService {
     // Получение всех категорий
@@ -7,12 +7,12 @@ class CategoryService {
     }
 
     // Получение категории по ID
-    async getCategoryById(id) {
+    async getCategoryById(id: string) {
         return await Category.findById(id);
     }
 
     // Создание категории
-    async createCategory(data) {
+    async createCategory(data: { name: string; description: string }) {
         const { name, description } = data;
 
         const lastCategory = await Category.findOne().sort('-position');
@@ -23,12 +23,12 @@ class CategoryService {
     }
 
     // Обновление категории
-    async updateCategory(id, data) {
+    async updateCategory(id: string, data: any) {
         return await Category.findByIdAndUpdate(id, data, { new: true });
     }
 
     // Удаление категории с коррекцией позиций
-    async deleteCategory(id) {
+    async deleteCategory(id: string) {
         const category = await Category.findById(id);
         if (!category) throw new Error('Category not found');
 
@@ -50,7 +50,7 @@ class CategoryService {
     }
 
     // Изменение позиции категории
-    async reorderCategory(id, newPosition) {
+    async reorderCategory(id: string, newPosition: number) {
         const category = await Category.findById(id);
         if (!category) throw new Error('Category not found');
 
@@ -91,4 +91,4 @@ class CategoryService {
     }
 }
 
-module.exports = new CategoryService();
+export default new CategoryService();
