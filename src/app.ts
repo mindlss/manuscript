@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import connectDB from '@config/db';
 import { logger } from '@utils/logger';
 
-import indexRoutes from '@routes/index';
 import articlesRoutes from '@routes/articles';
 import authRoutes from '@routes/auth';
 import tagsRoutes from '@routes/tags';
@@ -19,7 +18,6 @@ connectDB();
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
-app.use('/', indexRoutes);
 app.use('/articles', articlesRoutes);
 app.use('/auth', authRoutes);
 app.use('/tags', tagsRoutes);
