@@ -81,7 +81,6 @@ class ArticleController {
         }
     }
 
-    // Обновление статьи
     async updateArticle(req: Request, res: Response): Promise<void> {
         try {
             const { articleId } = req.params;
@@ -99,12 +98,13 @@ class ArticleController {
                 updateData,
                 userId
             );
+
             if (!updatedArticle) {
                 res.status(404).json({ error: 'Article not found' });
                 return;
             }
 
-            res.json(updatedArticle);
+            res.status(200).json(updatedArticle);
         } catch (error) {
             if (error instanceof Error) {
                 logger.error(`Error updating article: ${error.message}`);
@@ -127,14 +127,22 @@ class ArticleController {
             }
 
             const result = await ArticleService.deleteArticle(articleId);
-            res.json(result);
+
+            if (!result) {
+                res.status(404).json({ error: 'Article not found' });
+                return;
+            }
+
+            res.status(200).json(result);
         } catch (error) {
             if (error instanceof Error) {
                 logger.error(`Error deleting article: ${error.message}`);
                 res.status(500).json({ error: error.message });
+                return;
             } else {
                 logger.error(`Unknown error occurred: ${error}`);
                 res.status(500).json({ error: 'Internal server error' });
+                return;
             }
         }
     }
